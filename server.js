@@ -11,15 +11,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   process.env.CLIENT_URL,
+  process.env.CLIENT_URL_ALT,
   "http://localhost:5173",
   "http://127.0.0.1:5173",
 ].filter(Boolean);
+const vercelPreviewPattern =
+  /^https:\/\/github-analyzer-frontend(?:[-\w]*)?\.vercel\.app$/;
 
 // 🔥 MIDDLEWARE FIRST
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        vercelPreviewPattern.test(origin)
+      ) {
         return callback(null, true);
       }
 
