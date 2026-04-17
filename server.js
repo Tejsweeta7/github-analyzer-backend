@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import developerRoutes from "./routes/developerRoutes.js";
+import githubRoutes from "./routes/githubRoutes.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ console.log("🔥 THIS SERVER IS RUNNING");
 // 🔥 ROUTES (VERY IMPORTANT POSITION)
 app.use("/api/auth", authRoutes);
 app.use("/api/dev", developerRoutes);
+app.use("/api/github", githubRoutes);
 
 // 🔥 TEST ROUTE (MAIN)
 app.get("/test", (req, res) => {
